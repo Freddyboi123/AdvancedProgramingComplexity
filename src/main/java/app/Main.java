@@ -1,8 +1,10 @@
 package app;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -69,5 +71,43 @@ public class Main {
         executor.find(treeSet, new Student("Mette", 7));
         // O(1)
         executor.find(hashSet2, new Student("Mette", 7));
+
+        //-----------------------------------------------------------------
+
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        ArrayDeque<Integer> arrayDequeQueue = new ArrayDeque<>();
+        ArrayDeque<Integer> arrayDequeStack = new ArrayDeque<>();
+
+        builder.fillQueue(priorityQueue, 500000);
+        builder.fillQueue(arrayDequeQueue, 500000);
+        builder.fillQueue(arrayDequeStack, 500000);
+
+        // O(log n) - new element is sifted up the heap
+        executor.offer(priorityQueue, -1);
+        // O(1) amortized - put at the tail
+        executor.offer(arrayDequeQueue, -1);
+        // O(1) amortized - put at the head
+        executor.push(arrayDequeStack, -1);
+
+        // O(log n) - last element moved to the root and sifted down
+        executor.poll(priorityQueue);
+        // O(1) - taken from the head
+        executor.poll(arrayDequeQueue);
+        // O(1) - taken from the head
+        executor.pop(arrayDequeStack);
+
+        // 10000 x O(log n)
+        executor.offerLoop(priorityQueue);
+        // 10000 x O(1)
+        executor.offerLoop(arrayDequeQueue);
+        // 10000 x O(1)
+        executor.pushLoop(arrayDequeStack);
+
+        // 10000 x O(log n)
+        executor.pollLoop(priorityQueue);
+        // 10000 x O(1)
+        executor.pollLoop(arrayDequeQueue);
+        // 10000 x O(1)
+        executor.popLoop(arrayDequeStack);
     }
 }

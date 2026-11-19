@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class Builder {
@@ -40,6 +41,15 @@ public class Builder {
         set.add(s6);
 
         return set;
+    }
+
+    // fills in descending order, so every new element in a PriorityQueue is the new smallest
+    // and has to bubble all the way up to the root (worst case for insert)
+    public Queue<Integer> fillQueue(Queue queue, int n){
+        for (int i = n; i > 0 ; i--){
+            queue.offer(i);
+        }
+        return queue;
     }
     }
 
